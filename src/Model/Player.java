@@ -1,7 +1,7 @@
 package Model;
 
 public class Player {
-	//comment
+
 	private int identity;
 	private int score;
 	private Board game;
