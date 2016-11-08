@@ -12,7 +12,7 @@ public class Player {
 		this.game = game;
 	}
 	
-	public void sow(int position) {
+	public void sowAndCapture(int position) {
 		House house = game.getBoard().get(position);
 		int seeds = house.getSeeds();
 		house.clearHouse();
