@@ -18,6 +18,10 @@ public class House {
 		seeds++;
 	}
 	
+	public void clearHouse() {
+		seeds = 0;
+	}
+	
 	public int getSeeds() {
 		return seeds;
 	}
