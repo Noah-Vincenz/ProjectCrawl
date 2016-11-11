@@ -38,7 +38,7 @@ public class Player {
 			newHouse.incrementSeeds();
 			housesToIncrem.add(newHouse);
 		}
-		for (int i = housesToIncrem.size()-1; i > 0; --i) {
+		for (int i = housesToIncrem.size()-1; i >= 0; --i) {
 			if (housesToIncrem.get(i).getPlayer() != this && housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3) {
 				score += housesToIncrem.get(i).getSeeds();
 				housesToIncrem.get(i).clearHouse();
@@ -94,8 +94,7 @@ public class Player {
 		}
 	
 	}
-	
-	void setScore(int points) {
-		score += points;
+	public int getScore() {
+		return score;
 	}
 }

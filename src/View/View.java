@@ -8,6 +8,7 @@ package View;
 import Controller.Controller;
 import Model.Board;
 import java.util.ArrayList;
+import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -37,6 +38,19 @@ public class View extends Stage {
     ArrayList<Button> player2; // Player 2 is User 
     Board board;
     Controller c;
+    Label p2_Points_Top_Name;
+    Label p1_Points_Top_Name;
+    Label p2_Points_;
+    Label p1_Points_;
+
+    public void changeP1(int point) {
+        p1_Points_.setText("" + point);
+
+    }
+
+    public void changeP2(int point) {
+        p2_Points_.setText("" + point);
+    }
 
     private GridPane allButtons(ArrayList<Integer> values) {
         /* 
@@ -83,6 +97,18 @@ public class View extends Stage {
 
         }
 
+        Random random = new Random();
+        int randomNumber = random.nextInt(2);
+        if (randomNumber == 0)//disable player 1 button
+        {
+            for (int buttonIndex = 0; buttonIndex < 6; ++buttonIndex) {
+                listOfButtons.get(buttonIndex).setDisable(true);
+            }
+        } else {
+            for (int buttonIndex = 6; buttonIndex < 12; ++buttonIndex) {
+                listOfButtons.get(buttonIndex).setDisable(true);
+            }
+        }
 //        System.out.println(player1.size());
         int i = 0;
         for (Button x : listOfButtons) {
@@ -90,14 +116,51 @@ public class View extends Stage {
             seettingButtonFX(x);
             x.setId("" + i);
 
-            x.setText("" +values.get(i));
+            x.setText("" + values.get(i));
             x.setOnAction(event -> {
+
                 ArrayList<Integer> changes = c.handle(x);
                 int j = 0;
+                if (Integer.parseInt(x.getId()) >= 0 && Integer.parseInt(x.getId()) <= 5) {
+                    //player 1
+                    if (!x.getText().equals("0")) {
+                        this.changePlayerButtons(false, 2);
+                        this.changePlayerButtons(true, 1);
+                        this.changeP1(c.player2);
+                        this.changeP2(c.player1);
+
+                    }
+                } else {
+                    // pp2 
+                    if (!x.getText().equals("0")) {
+                        this.changePlayerButtons(false, 1);
+                        this.changePlayerButtons(true, 2);
+                        this.changeP2(c.player1);
+                        this.changeP1(c.player2);
+                    }
+                }
                 for (Button b : listOfButtons) {
                     b.setText("" + changes.get(j));
 
                     j++;
+                }
+                if (Integer.parseInt(x.getId()) >= 0 && Integer.parseInt(x.getId()) <= 5) {
+//                    player 1
+                    if (!x.getText().equals("0")) {
+                        this.changePlayerButtons(false, 2);
+                        this.changePlayerButtons(true, 1);
+                        this.changeP1(c.player2);
+                        this.changeP2(c.player1);
+
+                    }
+                } else {
+                    // pp2 
+                    if (!x.getText().equals("0")) {
+                        this.changePlayerButtons(false, 1);
+                        this.changePlayerButtons(true, 2);
+                        this.changeP2(c.player1);
+                        this.changeP1(c.player2);
+                    }
                 }
 
             });
@@ -112,6 +175,18 @@ public class View extends Stage {
 
     public void setController(Controller contrl) {
         this.c = contrl;
+    }
+
+    public void changePlayerButtons(boolean setEnabled, int checkPlayer) {
+        if (checkPlayer == 1) {
+            for (int buttonIndex = 0; buttonIndex < 6; ++buttonIndex) {
+                listOfButtons.get(buttonIndex).setDisable(setEnabled);
+            }
+        } else {
+            for (int buttonIndex = 6; buttonIndex < 12; ++buttonIndex) {
+                listOfButtons.get(buttonIndex).setDisable(setEnabled);
+            }
+        }
     }
 
     public View(ArrayList<Integer> values) {
@@ -134,10 +209,10 @@ public class View extends Stage {
         BorderPane leftHandGrid = new BorderPane();
         leftHandGrid.setPadding(new Insets(10, 20, 10, 40));
 
-        Label p1_Points_Top_Name = new Label("Player1");
+        p1_Points_Top_Name = new Label("Player1");
         leftHandGrid.setTop(p1_Points_Top_Name);
 
-        Label p1_Points_ = new Label("0");
+        p1_Points_ = new Label("0");
         leftHandGrid.setCenter(p1_Points_);
         settingLabelFX(p1_Points_Top_Name);// Setting fx for pl2 points and top label
         settingLabelFX(p1_Points_);// Setting fx for pl2 points and top label
@@ -154,10 +229,10 @@ public class View extends Stage {
         BorderPane rightHandGrid = new BorderPane();
         rightHandGrid.setPadding(new Insets(10, 20, 10, 40));
 
-        Label p2_Points_Top_Name = new Label("Player2");
+        p2_Points_Top_Name = new Label("Player2");
         rightHandGrid.setTop(p2_Points_Top_Name);
 
-        Label p2_Points_ = new Label("0");
+        p2_Points_ = new Label("0");
 
         settingLabelFX(p2_Points_);// Setting fx for pl2 points and top label
         settingLabelFX(p2_Points_Top_Name);// Setting fx for pl2 points and top label
@@ -166,7 +241,7 @@ public class View extends Stage {
 
         // End of player 2 right hand side 
         this.setTitle("Try");
-        this.setScene(new Scene(root, 600, 500));
+        this.setScene(new Scene(root, 650, 500));
 
     }
 
@@ -188,11 +263,12 @@ public class View extends Stage {
         l.setStyle(""// "-fx-background-color: slateblue;" // Setting backround to state blue 
                 // + " -fx-text-fill: white;" // Setting text colour to white 
                 + "-fx-stroke-width: 1;"
-                + " -fx-font:35px Tahoma;");
+                + " -fx-font:35px Tahoma;"
+        );
     }
 
     private void seettingButtonFX(Button b) {
-        b.getStyleClass().add("button.css");
+        b.setStyle("-fx-font: 20 arial; -fx-base: #EE2211;");
     }
 
 }
