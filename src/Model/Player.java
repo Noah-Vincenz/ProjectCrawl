@@ -39,7 +39,7 @@ public class Player {
 			housesToIncrem.add(newHouse);
 		}
 		for (int i = housesToIncrem.size()-1; i >= 0; --i) {
-			if (housesToIncrem.get(i).getPlayer() != this && housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3) {
+			if (housesToIncrem.get(i).getPlayer() == this && (housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3)) {
 				score += housesToIncrem.get(i).getSeeds();
 				housesToIncrem.get(i).clearHouse();
 			}
@@ -51,15 +51,15 @@ public class Player {
 		
 		Board copy = game;
 				
-		if(newPosition > 6 && identity == 1) {
-			House check = game.getHouses().get(newPosition);
-			int checkSeeds = check.getSeeds();
-		}
-		
-		if(newPosition < 6 && identity == 2) {
-			House check = game.getHouses().get(newPosition);
-			int checkSeeds = check.getSeeds();
-		}
+//		if(newPosition > 6 && identity == 2) {
+//			House check = game.getHouses().get(newPosition);
+//			int checkSeeds = check.getSeeds();
+//		}
+//		
+//		if(newPosition < 6 && identity == 1) {
+//			House check = game.getHouses().get(newPosition);
+//			int checkSeeds = check.getSeeds();
+//		}
 		
 		if(identity == 1) {
 			
