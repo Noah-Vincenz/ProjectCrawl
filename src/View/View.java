@@ -89,13 +89,13 @@ public class View extends Stage {
                 grid.add(temp, newColm, 2); // Row 2 and column "New Column" (start again from index 0 so its aligment to player 2)
             }
         }
+        
         for (int j = (player2.size() - 1); j >= 0; --j) {
             listOfButtons.add(player2.get(j));
         }
+        
         for (int i = 0; i < 6; ++i) {
-
             listOfButtons.add(player1.get(i));
-
         }
 
         Random random = new Random();

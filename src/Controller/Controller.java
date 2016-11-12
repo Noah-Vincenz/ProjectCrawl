@@ -10,6 +10,8 @@ import Model.House;
 import Model.Player;
 import View.View;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 public class Controller {
 
     Board board;
+    boolean withCpu = false;
     Player cpu_Player1;
     Player manual_Player2;
     View view;
@@ -68,6 +71,17 @@ public class Controller {
             //  view.changeP1(manual_Player2.getScore());
 //            view.changePlayerButtons(true, 1);
 
+        } else if(withCpu == true) {
+        	
+        	Random random = new Random();
+            int randomNumber = random.nextInt(6);
+            
+            cpu_Player1.sowAndCapture(randomNumber);
+            player1 = cpu_Player1.getScore();
+            player2 = manual_Player2.getScore();
+            
+            int winning = board.checkWin();
+        	
         } else {
 
             cpu_Player1.sowAndCapture(indexForButton);
