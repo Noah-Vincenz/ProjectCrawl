@@ -63,6 +63,8 @@ public class Controller {
 //            view.changePlayerButtons(false, 2);
             player2 = manual_Player2.getScore();
             player1 = cpu_Player1.getScore();
+            
+            int winning = board.checkWin();
             //  view.changeP1(manual_Player2.getScore());
 //            view.changePlayerButtons(true, 1);
 
@@ -74,6 +76,8 @@ public class Controller {
             //  view.changeP2(cpu_Player1.getScore());
 //            view.changePlayerButtons(false, 1);
 //            view.changePlayerButtons(true, 2);
+            
+            int winning = board.checkWin();
 
         }
         for (House h : board.getHouses()) {
