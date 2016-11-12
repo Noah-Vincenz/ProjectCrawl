@@ -67,9 +67,9 @@ public class Board {
      * @return the method returns 1 if the first player won, 2 if the second player won, 3 if the game ended in a draw.
      */
     public int checkWin() {
-    	if(firstPlayer.getScore() == 25) {
+    	if(firstPlayer.getScore() >= 25) {
     		return 1;
-    	} else if(secondPlayer.getScore() == 25) {
+    	} else if(secondPlayer.getScore() >= 25) {
     		return 2;
     	} else if(firstPlayer.getScore() == 24 && secondPlayer.getScore() == 24) {
     		return 3;

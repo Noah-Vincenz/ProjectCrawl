@@ -36,6 +36,7 @@ public class Player {
 		int seeds = house.getSeeds();
 		house.clearHouse();
 		int newPosition = position;
+		Board copy = game;
 		
 		for(int i = 0; i < seeds; ++i) {			
 			newPosition--;
@@ -56,7 +57,7 @@ public class Player {
 			newHouse.incrementSeeds();
 			housesToIncrem.add(newHouse);
 		}
-		
+
 		ArrayList<Integer> temp = new ArrayList<Integer>();	
 		
 		for(int i = 0; i < game.getHouses().size(); ++i) {
@@ -64,7 +65,7 @@ public class Player {
 		}
 		
 		tempScore = score;
-		
+
 		for (int i = housesToIncrem.size()-1; i >= 0; --i) {
 			if (housesToIncrem.get(i).getPlayer() == this && (housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3)) {
 				score += housesToIncrem.get(i).getSeeds();
@@ -79,14 +80,15 @@ public class Player {
 			
 			int isEmpty = 0;
 			
-			for(int i = 0; i < 6; ++i) {
-				House check = game.getHouses().get(i);
+			for(int j = 0; j < 6; ++j) {
+				House check = game.getHouses().get(j);
 				if(check.getSeeds() == 0) {
-					isEmpty ++;
+					isEmpty++;
 				}
 			}
 			
 			if(isEmpty == 6) {
+
 				for(int i = 0; i < game.getHouses().size(); ++i) {
 					game.getHouses().get(i).setSeeds(temp.get(i));
 					score = tempScore;
@@ -115,6 +117,11 @@ public class Player {
 	
 	}
 	public int getScore() {
+		return score;
+	}
+	
+	public int setInitialScore(int i){
+		score = i;
 		return score;
 	}
 }

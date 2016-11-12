@@ -25,6 +25,7 @@ public class Main extends Application {
         Controller c = new Controller();
         View v  = new View(c.values);
         v.setController(c);
+        c.setView(v, c.values);
         
         v.show();
         
