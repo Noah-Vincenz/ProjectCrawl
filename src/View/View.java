@@ -45,6 +45,7 @@ public class View extends Stage {
 
     public void changeP1(int point) {
         p1_Points_.setText("" + point);
+        
 
     }
 
@@ -114,7 +115,8 @@ public class View extends Stage {
         int i = 0;
         for (Button x : listOfButtons) {
 //            System.out.println(x.getId());
-            seettingButtonFX(x);
+        	x.getStyleClass().add("num-button");
+        	
             x.setId("" + i);
 
             x.setText("" + values.get(i));
@@ -193,15 +195,21 @@ public class View extends Stage {
     public View(ArrayList<Integer> values) {
         listOfButtons = new ArrayList<>();
         player1 = new ArrayList<>();// Player 1 is AI 
+        String css = this.getClass().getResource("/View/layoutstyle.css").toExternalForm();
+        
         player2 = new ArrayList<>(); // Player 2 is User 
 
         BorderPane root = new BorderPane();
+        Scene scene = new Scene(root, 1000, 500);
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(css);
         Button button1 = new Button("Hello");
         GridPane grid = allButtons(values);
         grid.setHgap(6);
         grid.setVgap(6);
 
         root.setCenter(grid);
+        root.getStyleClass().add("mainBackGround");
 
         // Player 1 Left hand side  
         /*
@@ -242,7 +250,7 @@ public class View extends Stage {
 
         // End of player 2 right hand side 
         this.setTitle("Try");
-        this.setScene(new Scene(root, 650, 500));
+        this.setScene(scene);
 
     }
 
@@ -261,11 +269,7 @@ public class View extends Stage {
     }
 
     private void settingLabelFX(Label l) {
-        l.setStyle(""// "-fx-background-color: slateblue;" // Setting backround to state blue 
-                // + " -fx-text-fill: white;" // Setting text colour to white 
-                + "-fx-stroke-width: 1;"
-                + " -fx-font:35px Tahoma;"
-        );
+    	l.getStyleClass().add("scoreColor");
     }
 
     private void seettingButtonFX(Button b) {
