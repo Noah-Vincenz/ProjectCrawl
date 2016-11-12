@@ -28,6 +28,10 @@ public class House {
     public void incrementSeeds() {
         seeds++;
     }
+    
+    public void setSeeds(int seeds) {
+		this.seeds = seeds;
+	}
 
     /**
      * Method is called whenever a house is captured or sowed.

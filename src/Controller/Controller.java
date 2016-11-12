@@ -103,7 +103,22 @@ public class Controller {
             values.add(i.getSeeds());
         }
         return values;
-
     }
+    
+    public void setCPU(boolean Ai) {
+    	withCpu = Ai;
+    }
+    
+    public Player getManual_Player2() {
+		return manual_Player2;
+	}
+    
+    public Player getCpu_Player1() {
+		return cpu_Player1;
+	}
+    
+    public Board getBoard() {
+		return board;
+	}
 
 }
