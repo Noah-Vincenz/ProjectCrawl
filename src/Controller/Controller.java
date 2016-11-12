@@ -45,7 +45,6 @@ public class Controller {
     public void setView(View v, ArrayList<Integer> values) {
         view = v;
         v.updateGrid(values);
-
     }
 
     public void updateBoard() {
@@ -62,16 +61,16 @@ public class Controller {
 
             manual_Player2.sowAndCapture(indexForButton);
 //            view.changePlayerButtons(false, 2);
-            player1 = manual_Player2.getScore();
-            player2 = cpu_Player1.getScore();
+            player2 = manual_Player2.getScore();
+            player1 = cpu_Player1.getScore();
             //  view.changeP1(manual_Player2.getScore());
 //            view.changePlayerButtons(true, 1);
 
         } else {
 
             cpu_Player1.sowAndCapture(indexForButton);
-            player2 = cpu_Player1.getScore();
-            player1 = manual_Player2.getScore();
+            player1 = cpu_Player1.getScore();
+            player2 = manual_Player2.getScore();
             //  view.changeP2(cpu_Player1.getScore());
 //            view.changePlayerButtons(false, 1);
 //            view.changePlayerButtons(true, 2);
