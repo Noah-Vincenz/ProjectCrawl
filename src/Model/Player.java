@@ -35,8 +35,8 @@ public class Player {
 		int seeds = house.getSeeds();
 		house.clearHouse();
 		int newPosition = position;
-				
-		for(int i = 0; i < seeds; ++i) {
+		
+		for(int i = 0; i < seeds; ++i) {			
 			newPosition--;
 			
 			if(newPosition < 0) {
@@ -45,9 +45,13 @@ public class Player {
 			
 			if(newPosition == position) {
 				newPosition--;
+				if(newPosition < 0) {
+					newPosition = 11;
+				}
 			}
 			
-			House newHouse = game.getHouses().get(newPosition);
+			ArrayList<House> testing = game.getHouses();
+			House newHouse = testing.get(newPosition);
 			newHouse.incrementSeeds();
 			housesToIncrem.add(newHouse);
 		}
