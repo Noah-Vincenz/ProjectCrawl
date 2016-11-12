@@ -3,6 +3,13 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player class contains all the methods that a player can call when playing
+ * the game.
+ * 
+ * @author hanitawil
+ *
+ */
 public class Player {
 
 	private int identity;
@@ -10,6 +17,12 @@ public class Player {
 	private Board game;
 	List<House> housesToIncrem;
 	
+	/**
+	 * 
+	 * 
+	 * @param identity
+	 * @param game
+	 */
 	public Player(int identity, Board game) {
 		score = 0;
 		this.identity = identity;
@@ -22,8 +35,8 @@ public class Player {
 		int seeds = house.getSeeds();
 		house.clearHouse();
 		int newPosition = position;
-				
-		for(int i = 0; i < seeds; ++i) {
+		
+		for(int i = 0; i < seeds; ++i) {			
 			newPosition--;
 			
 			if(newPosition < 0) {
@@ -32,14 +45,18 @@ public class Player {
 			
 			if(newPosition == position) {
 				newPosition--;
+				if(newPosition < 0) {
+					newPosition = 11;
+				}
 			}
 			
-			House newHouse = game.getHouses().get(newPosition);
+			ArrayList<House> testing = game.getHouses();
+			House newHouse = testing.get(newPosition);
 			newHouse.incrementSeeds();
 			housesToIncrem.add(newHouse);
 		}
-		for (int i = housesToIncrem.size()-1; i > 0; --i) {
-			if (housesToIncrem.get(i).getPlayer() != this && housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3) {
+		for (int i = housesToIncrem.size()-1; i >= 0; --i) {
+			if (housesToIncrem.get(i).getPlayer() == this && (housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3)) {
 				score += housesToIncrem.get(i).getSeeds();
 				housesToIncrem.get(i).clearHouse();
 			}
@@ -51,15 +68,15 @@ public class Player {
 		
 		Board copy = game;
 				
-		if(newPosition > 6 && identity == 1) {
-			House check = game.getHouses().get(newPosition);
-			int checkSeeds = check.getSeeds();
-		}
-		
-		if(newPosition < 6 && identity == 2) {
-			House check = game.getHouses().get(newPosition);
-			int checkSeeds = check.getSeeds();
-		}
+//		if(newPosition > 6 && identity == 2) {
+//			House check = game.getHouses().get(newPosition);
+//			int checkSeeds = check.getSeeds();
+//		}
+//		
+//		if(newPosition < 6 && identity == 1) {
+//			House check = game.getHouses().get(newPosition);
+//			int checkSeeds = check.getSeeds();
+//		}
 		
 		if(identity == 1) {
 			
@@ -94,8 +111,7 @@ public class Player {
 		}
 	
 	}
-	
-	void setScore(int points) {
-		score += points;
+	public int getScore() {
+		return score;
 	}
 }

@@ -26,10 +26,12 @@ public class Controller {
     Player manual_Player2;
     View view;
     ArrayList<Integer> values;
+    public int player1;
+    public int player2;
 
     public Controller() {
 
-        
+        // 
         board = new Board();
         cpu_Player1 = board.getPlayer1();
         manual_Player2 = board.getPlayer2();
@@ -43,7 +45,6 @@ public class Controller {
     public void setView(View v, ArrayList<Integer> values) {
         view = v;
         v.updateGrid(values);
-
     }
 
     public void updateBoard() {
@@ -57,14 +58,22 @@ public class Controller {
         int indexForButton = Integer.parseInt(btnPressed.getId());
         if (indexForButton >= 0 && indexForButton <= 5) {
             // player is CPU ==> player1 
-            cpu_Player1.sowAndCapture(indexForButton);
 
-            //manual_Player2.sowAndCapture(indexForButton);
+            manual_Player2.sowAndCapture(indexForButton);
+//            view.changePlayerButtons(false, 2);
+            player2 = manual_Player2.getScore();
+            player1 = cpu_Player1.getScore();
+            //  view.changeP1(manual_Player2.getScore());
+//            view.changePlayerButtons(true, 1);
 
         } else {
 
-            //cpu_Player1.sowAndCapture(indexForButton);
-            manual_Player2.sowAndCapture(indexForButton);
+            cpu_Player1.sowAndCapture(indexForButton);
+            player1 = cpu_Player1.getScore();
+            player2 = manual_Player2.getScore();
+            //  view.changeP2(cpu_Player1.getScore());
+//            view.changePlayerButtons(false, 1);
+//            view.changePlayerButtons(true, 2);
 
         }
         for (House h : board.getHouses()) {
