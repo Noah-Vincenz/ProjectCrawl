@@ -62,6 +62,7 @@ public class View extends Stage {
         for (int i = 0; i < 12; ++i) {  //Buttons till 6  
             Button temp = new Button("AC");
             temp.setId("" + i);// Giving buttons a text 
+            System.out.println(temp.getId());
             //temp.setId("" + i); // Setting Id So we Can regonise (MAYBE NOT NEEDED IN THE LONG RUN)
 
 //            listOfButtons.add(temp); // Adding all made buttons to the list 

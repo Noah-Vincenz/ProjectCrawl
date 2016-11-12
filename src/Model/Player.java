@@ -3,6 +3,13 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player class contains all the methods that a player can call when playing
+ * the game.
+ * 
+ * @author hanitawil
+ *
+ */
 public class Player {
 
 	private int identity;
@@ -10,6 +17,12 @@ public class Player {
 	private Board game;
 	List<House> housesToIncrem;
 	
+	/**
+	 * 
+	 * 
+	 * @param identity
+	 * @param game
+	 */
 	public Player(int identity, Board game) {
 		score = 0;
 		this.identity = identity;
