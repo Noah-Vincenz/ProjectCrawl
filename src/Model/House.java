@@ -58,4 +58,8 @@ public class House {
     public Player getPlayer() {
         return ownership;
     }
+    
+    public void resetSeeds(){
+    	seeds = 4;
+    }
 }
