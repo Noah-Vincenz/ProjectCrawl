@@ -39,8 +39,14 @@ public class Controller {
         cpu_Player1 = board.getPlayer1();
         manual_Player2 = board.getPlayer2();
         values = new ArrayList<>();
+//        for (House i : board.getHouses()) {
+//            values.add(i.getSeeds());
+//        }
+        int j = 0;
         for (House i : board.getHouses()) {
+        	if(j<=5&&j>=2){i.setSeeds(1);}else if (j>=0&&j<2){i.clearHouse();}
             values.add(i.getSeeds());
+            j++;
         }
 
     }

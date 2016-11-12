@@ -16,6 +16,7 @@ public class Player {
 	private int score;
 	private Board game;
 	List<House> housesToIncrem;
+	private int tempScore;
 	
 	/**
 	 * 
@@ -55,6 +56,15 @@ public class Player {
 			newHouse.incrementSeeds();
 			housesToIncrem.add(newHouse);
 		}
+		
+		ArrayList<Integer> temp = new ArrayList<Integer>();	
+		
+		for(int i = 0; i < game.getHouses().size(); ++i) {
+			temp.add(game.getHouses().get(i).getSeeds());
+		}
+		
+		tempScore = score;
+		
 		for (int i = housesToIncrem.size()-1; i >= 0; --i) {
 			if (housesToIncrem.get(i).getPlayer() == this && (housesToIncrem.get(i).getSeeds() == 2 || housesToIncrem.get(i).getSeeds() == 3)) {
 				score += housesToIncrem.get(i).getSeeds();
@@ -63,38 +73,9 @@ public class Player {
 			else {
 				break;
 			}
-		}
-
-		
-		Board copy = game;
-				
-//		if(newPosition > 6 && identity == 2) {
-//			House check = game.getHouses().get(newPosition);
-//			int checkSeeds = check.getSeeds();
-//		}
-//		
-//		if(newPosition < 6 && identity == 1) {
-//			House check = game.getHouses().get(newPosition);
-//			int checkSeeds = check.getSeeds();
-//		}
+		}		
 		
 		if(identity == 1) {
-			
-			int isEmpty = 0;
-			
-			for(int i = 6; i < 12; ++i) {
-				House check = game.getHouses().get(i);
-				if(check.getSeeds() == 0) {
-					isEmpty ++;
-				}
-			}
-			
-			if(isEmpty == 6) {
-				game = copy;
-			}
-		}
-		
-		if(identity == 2) {
 			
 			int isEmpty = 0;
 			
@@ -106,7 +87,29 @@ public class Player {
 			}
 			
 			if(isEmpty == 6) {
-				game = copy;
+				for(int i = 0; i < game.getHouses().size(); ++i) {
+					game.getHouses().get(i).setSeeds(temp.get(i));
+					score = tempScore;
+				}
+			}
+		}
+		
+		if(identity == 2) {
+			
+			int isEmpty = 0;
+			
+			for(int i = 6; i < 12; ++i) {
+				House check = game.getHouses().get(i);
+				if(check.getSeeds() == 0) {
+					isEmpty ++;
+				}
+			}
+			
+			if(isEmpty == 6) {
+				for(int i = 0; i < game.getHouses().size(); ++i) {
+					game.getHouses().get(i).setSeeds(temp.get(i));
+					score = tempScore;
+				}
 			}
 		}
 	
