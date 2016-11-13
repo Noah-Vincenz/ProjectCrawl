@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import View.MainWindow;
 import View.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,14 +22,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-      
-        Controller c = new Controller();
-        View v  = new View(c.values);
-        v.setController(c);
-        c.setView(v, c.values);
-        
-        v.show();
-        
-              
+    	//primaryStage.setResizable(false);
+        MainWindow m = new MainWindow(primaryStage);
+           
     }
 }
