@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Model.Board;
@@ -28,6 +23,7 @@ import javafx.stage.Stage;
 public class Controller {
 
     Board board;
+    
     boolean withCpu = false;
     Player cpu_Player1;
     Player manual_Player2;
@@ -36,6 +32,16 @@ public class Controller {
     public int player1;
     public int player2;
 
+    
+    Stage mainMenu;
+    public void setMainMenu(Stage parent){
+        mainMenu = parent;
+    }
+    public Stage getMainMenu(){
+        return mainMenu;
+    }
+    
+    
     public Controller() {
 
         // 
@@ -47,14 +53,8 @@ public class Controller {
         for (House i : board.getHouses()) {
             values.add(i.getSeeds());
         }
-//        int j = 0;
-//
-//        for (House i : board.getHouses()) {
-//        	if(j<=5&&j>=2){i.setSeeds(1);}else if (j>=0&&j<2){i.clearHouse();}
-//            values.add(i.getSeeds());
-//            j++;
-//        }
         
+     
 
     }
 
@@ -188,5 +188,11 @@ public void refreshGame(int winner){
     public Board getBoard() {
 		return board;
 	}
+
+    public ArrayList<Integer> getValues() {
+        return values;
+    }
+    
+    //terminate game window when the go back button is placed.  
 
 }

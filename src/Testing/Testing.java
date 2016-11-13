@@ -1,6 +1,9 @@
 package Testing;
 
 import Controller.Controller;
+//import org.junit.runner.JUnitCore;
+//import org.junit.runner.Result;
+//import org.junit.runner.notification.Failure;
 
 public class Testing {
 
@@ -50,6 +53,14 @@ public class Testing {
 		} else {
 			System.out.println("Failed: sowing a house with 12 seeds works correctly");
 		}
+
+//		    // Replace MyTestClass by your JUnit tests class
+//		    Result result = JUnitCore.runClasses(MyPrimeTest.class);
+//		    for (Failure failure : result.getFailures()) {
+//		      System.out.println(failure.toString());
+//		    }
+//		    System.out.println(result.wasSuccessful());
+//		  }
 	}
 
 }

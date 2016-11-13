@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Controller.Controller;
@@ -11,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -42,10 +39,10 @@ public class View extends Stage {
     Label p1_Points_Top_Name;
     Label p2_Points_;
     Label p1_Points_;
+    Button terminate, go_Back;
 
     public void changeP1(int point) {
         p1_Points_.setText("" + point);
-        
 
     }
 
@@ -90,11 +87,11 @@ public class View extends Stage {
                 grid.add(temp, newColm, 2); // Row 2 and column "New Column" (start again from index 0 so its aligment to player 2)
             }
         }
-        
+
         for (int j = (player2.size() - 1); j >= 0; --j) {
             listOfButtons.add(player2.get(j));
         }
-        
+
         for (int i = 0; i < 6; ++i) {
             listOfButtons.add(player1.get(i));
         }
@@ -115,8 +112,8 @@ public class View extends Stage {
         int i = 0;
         for (Button x : listOfButtons) {
 //            System.out.println(x.getId());
-        	x.getStyleClass().add("num-button");
-        	
+            x.getStyleClass().add("num-button");
+
             x.setId("" + i);
 
             x.setText("" + values.get(i));
@@ -196,15 +193,40 @@ public class View extends Stage {
         listOfButtons = new ArrayList<>();
         player1 = new ArrayList<>();// Player 1 is AI 
         String css = this.getClass().getResource("/View/layoutstyle.css").toExternalForm();
-        
+
         player2 = new ArrayList<>(); // Player 2 is User 
 
         BorderPane root = new BorderPane();
+
+        //Setting the Bottom terminate and go back button // 
+        terminate = new Button("TERMINATE");
+        go_Back = new Button("Go Back");
+        terminate.getStyleClass().add("buttonBottom");
+        terminate.setOnAction(event -> {
+            c.getMainMenu().show();
+            
+        });
+        go_Back.getStyleClass().add("buttonBottom");
+        go_Back.setOnAction(event -> {
+            c.getMainMenu().show();
+            
+        });
+        
+
+        HBox bottom_Buttons = new HBox();
+        bottom_Buttons.setAlignment(Pos.CENTER);
+
+        bottom_Buttons.getChildren().addAll(terminate, go_Back);
+        bottom_Buttons.setPadding(new Insets(15, 12, 15, 12));
+        bottom_Buttons.setSpacing(30);
+        root.setBottom(bottom_Buttons);
+
+        // End bottom 
         Scene scene = new Scene(root, 1000, 500);
         scene.getStylesheets().clear();
         scene.getStylesheets().add(css);
         Button button1 = new Button("Hello");
-        GridPane grid = allButtons(values);
+        grid = allButtons(values);
         grid.setHgap(6);
         grid.setVgap(6);
 
@@ -267,9 +289,10 @@ public class View extends Stage {
         }
 
     }
+    
 
     private void settingLabelFX(Label l) {
-    	l.getStyleClass().add("scoreColor");
+        l.getStyleClass().add("scoreColor");
     }
 
     private void seettingButtonFX(Button b) {
