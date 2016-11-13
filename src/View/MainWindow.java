@@ -58,9 +58,9 @@ public class MainWindow {
             }  
             
         });
+        
         stageMain.show();
-    
-
+        
     }
 
 
