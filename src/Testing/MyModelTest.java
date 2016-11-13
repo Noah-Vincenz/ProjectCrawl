@@ -117,4 +117,9 @@ public class MyModelTest {
 	    assertEquals(2, c.getBoard().getHouses().get(2).getSeeds());
 
 	}
+	
+	@Test
+	public void sow12SeedHouse() {
+		
+	}
 }

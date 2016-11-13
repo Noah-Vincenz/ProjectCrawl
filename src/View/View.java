@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package View;
 
 import Controller.Controller;
@@ -22,7 +27,7 @@ import javafx.stage.Stage;
  *
  * @author aking
  */
-public class View extends Stage {
+public final class View extends Stage {
 
     /*
  * To change this license header, choose License Headers in Project Properties.
@@ -40,6 +45,11 @@ public class View extends Stage {
     Label p2_Points_;
     Label p1_Points_;
     Button terminate, go_Back;
+    public boolean isCpu = false;
+
+    public void setCpu(boolean value) {
+        isCpu = value;
+    }
 
     public void changeP1(int point) {
         p1_Points_.setText("" + point);
@@ -49,6 +59,7 @@ public class View extends Stage {
     public void changeP2(int point) {
         p2_Points_.setText("" + point);
     }
+    int firstMove = 0;
 
     private GridPane allButtons(ArrayList<Integer> values) {
         /* 
@@ -98,15 +109,18 @@ public class View extends Stage {
 
         Random random = new Random();
         int randomNumber = random.nextInt(2);
+
         if (randomNumber == 0)//disable player 1 button
         {
             for (int buttonIndex = 0; buttonIndex < 6; ++buttonIndex) {
                 listOfButtons.get(buttonIndex).setDisable(true);
             }
+
         } else {
             for (int buttonIndex = 6; buttonIndex < 12; ++buttonIndex) {
                 listOfButtons.get(buttonIndex).setDisable(true);
             }
+//           
         }
 //        System.out.println(player1.size());
         int i = 0;
@@ -124,8 +138,8 @@ public class View extends Stage {
                 if (Integer.parseInt(x.getId()) >= 0 && Integer.parseInt(x.getId()) <= 5) {
                     //player 1
                     if (!x.getText().equals("0")) {
-                        this.changePlayerButtons(false, 2);
-                        this.changePlayerButtons(true, 1);
+//                        this.changePlayerButtons(false, 2);
+//                        this.changePlayerButtons(true, 1);
                         this.changeP1(c.player2);
                         this.changeP2(c.player1);
 
@@ -133,8 +147,8 @@ public class View extends Stage {
                 } else {
                     // pp2 
                     if (!x.getText().equals("0")) {
-                        this.changePlayerButtons(false, 1);
-                        this.changePlayerButtons(true, 2);
+//                        this.changePlayerButtons(false, 1);
+//                        this.changePlayerButtons(true, 2);
                         this.changeP2(c.player1);
                         this.changeP1(c.player2);
                     }
@@ -147,8 +161,8 @@ public class View extends Stage {
                 if (Integer.parseInt(x.getId()) >= 0 && Integer.parseInt(x.getId()) <= 5) {
 //                    player 1
                     if (!x.getText().equals("0")) {
-                        this.changePlayerButtons(false, 2);
-                        this.changePlayerButtons(true, 1);
+//                        this.changePlayerButtons(false, 2);
+//                        this.changePlayerButtons(true, 1);
                         this.changeP1(c.player2);
                         this.changeP2(c.player1);
 
@@ -156,8 +170,8 @@ public class View extends Stage {
                 } else {
                     // pp2 
                     if (!x.getText().equals("0")) {
-                        this.changePlayerButtons(false, 1);
-                        this.changePlayerButtons(true, 2);
+//                        this.changePlayerButtons(false, 1);
+//                        this.changePlayerButtons(true, 2);
                         this.changeP2(c.player1);
                         this.changeP1(c.player2);
                     }
@@ -167,6 +181,10 @@ public class View extends Stage {
 
 //  x.addEventFilter(MouseEvent.MOUSE_PRESSED,new Controller());
             i++;
+
+        }
+        if (randomNumber == 0) {
+            firstMove = 1;
 
         }
 
@@ -189,7 +207,9 @@ public class View extends Stage {
         }
     }
 
-    public View(ArrayList<Integer> values) {
+    public View(Controller c1,boolean isWithCPU) {
+        isCpu = isWithCPU;
+        c = c1;
         listOfButtons = new ArrayList<>();
         player1 = new ArrayList<>();// Player 1 is AI 
         String css = this.getClass().getResource("/View/layoutstyle.css").toExternalForm();
@@ -204,14 +224,13 @@ public class View extends Stage {
         terminate.getStyleClass().add("buttonBottom");
         terminate.setOnAction(event -> {
             c.getMainMenu().show();
-            
+
         });
         go_Back.getStyleClass().add("buttonBottom");
         go_Back.setOnAction(event -> {
             c.getMainMenu().show();
-            
+
         });
-        
 
         HBox bottom_Buttons = new HBox();
         bottom_Buttons.setAlignment(Pos.CENTER);
@@ -226,7 +245,14 @@ public class View extends Stage {
         scene.getStylesheets().clear();
         scene.getStylesheets().add(css);
         Button button1 = new Button("Hello");
-        grid = allButtons(values);
+        grid = allButtons(c1.getValues());
+        if (firstMove == 1 && isCpu == true) {
+
+            c.doFirstMoveCPU();
+            this.changePlayerButtons(false, 1);
+            this.changePlayerButtons(true, 2);
+        }
+
         grid.setHgap(6);
         grid.setVgap(6);
 
@@ -289,7 +315,6 @@ public class View extends Stage {
         }
 
     }
-    
 
     private void settingLabelFX(Label l) {
         l.getStyleClass().add("scoreColor");
