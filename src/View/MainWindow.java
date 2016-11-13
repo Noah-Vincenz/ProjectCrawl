@@ -33,20 +33,26 @@ public class MainWindow {
 
     public MainWindow(Stage stageMain) {
 
-        Label owareLabel = new Label("Oware");
+        Label owareLabel = new Label("");
         owareLabel.setFont(Font.font("Calibri", FontWeight.BOLD, 70));
 
         Button onePlayerButton = new Button("One Player Mode");
+        onePlayerButton.getStyleClass().add("buttonBottomMenu");
         Button twoPlayerButton = new Button("Two Player Mode");
+        twoPlayerButton.getStyleClass().add("buttonBottomMenu");
         VBox layout = new VBox(10);
         layout.getChildren().addAll(owareLabel, onePlayerButton, twoPlayerButton);
         layout.setAlignment(Pos.CENTER);
+        layout.getStyleClass().add("menuBackGround");
         Scene scene = new Scene(layout, 600, 450);
         stageMain.setScene(scene);
         stageMain.setTitle("Oware Main Menu");
 //        MainWindow m  = this;
 //        m.show();
-
+        String css = this.getClass().getResource("/View/layoutstyle.css").toExternalForm();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(css);
+        
         twoPlayerButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -57,6 +63,9 @@ public class MainWindow {
                 //v.setController(c);
                 c.setView(v, c.getValues());
                 v.show();
+                v.setResizable(false);
+//                v.setCpu(false);
+
                 c.setMainMenu(stageMain);
                 stageMain.hide();
 
@@ -72,9 +81,11 @@ public class MainWindow {
                 c.setCPU(true);
                 View v = new View(c, true);
 //                v.setController(c);
+//                v.setCpu(true);
 
                 c.setView(v, c.getValues());
                 v.show();
+                v.setResizable(false);
                 c.setMainMenu(stageMain);
                 stageMain.hide();
 

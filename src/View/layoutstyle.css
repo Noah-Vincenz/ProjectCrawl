@@ -1,16 +1,35 @@
-.buttonBottom{
-    -fx-background-color: blueviolet;
-/*    -fx-background-insets: 0, 1, 2;*/
-    -fx-font-family:  "Helvetica";
-    -fx-text-fill:  white;
+.menuBackGround{ 
+    -fx-background-color:transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center; 
+    -fx-background-image: url('/View/mainMenuBg.png')
+
+
 }
 .num-button  {
     -fx-background-color: transparent;
-    /*-fx-background-radius: 50%;*/
-    -fx-background-insets: 0, 0, 0;
+    /*   // -fx-background-radius: 50%;*/
+    -fx-background-insets: 0, 1, 2;
     -fx-font-family:  "Helvetica";
     -fx-text-fill:  white;
     -fx-font-size:  40px; 
+
+}
+.buttonBottom{
+    -fx-background-color: blueviolet;
+/*        -fx-background-insets: 0, 1, 2;*/
+    -fx-font-family:  "Helvetica";
+    -fx-text-fill:  white;
+    -fx-font-size:  20px;
+
+}
+.buttonBottomMenu{
+    -fx-background-color: blueviolet;
+    -fx-background-insets: 0, 1, 2;
+    -fx-font-family:  "Helvetica";
+    -fx-text-fill:  white;
+    -fx-font-size:  15px;
+
 }
 .gridBackGround{
     -fx-background-color:transparent;
@@ -18,7 +37,6 @@
     -fx-background-position:center; 
     -fx-background-image: url('/View/background.png')
 }
-
 .mainBackGround{
     -fx-background-color:transparent;
     -fx-background-repeat: no-repeat;
@@ -41,8 +59,8 @@
         -moz-transform-style: preserve-3d;
         transform-style: preserve-3d;*/
     -fx-background-repeat: no-repeat;
+    -fx-background-image: url('/View/halo2.png');
     -fx-background-size: 83px;
-    -fx-background-image: url('/View/halo2.png')
 }
 
 

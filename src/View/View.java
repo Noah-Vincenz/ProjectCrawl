@@ -8,6 +8,7 @@ package View;
 import Controller.Controller;
 import Model.Board;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,10 @@ import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -223,11 +227,14 @@ public final class View extends Stage {
         go_Back = new Button("Go Back");
         terminate.getStyleClass().add("buttonBottom");
         terminate.setOnAction(event -> {
-            c.getMainMenu().show();
-
+            
+        	this.close();
+        	this.playAgain();
+            
         });
         go_Back.getStyleClass().add("buttonBottom");
         go_Back.setOnAction(event -> {
+        	this.close();
             c.getMainMenu().show();
 
         });
@@ -301,6 +308,62 @@ public final class View extends Stage {
         this.setScene(scene);
 
     }
+    
+    public void playAgain(){
+    	 
+   	 Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("CONGRATULATIONS!");
+        int count = 0;
+        int count2 = 0;
+        
+        int scoreCPU = 0;
+        int scoreMan = 0;
+        for(int i = 0; i < 6; i++){
+        	if(c.getBoard().getHouses().get(i).getSeeds() == 1){
+        		count++;
+        	}
+        }
+        
+        for(int i = 6; i < 12; i++){
+        	if(c.getBoard().getHouses().get(i).getSeeds() == 1){
+        		count2++;
+        	}
+        }
+        
+        if(count == 1 && count2 == 1){
+        	scoreMan = c.getManual_Player2().getScore() + 1;
+        	scoreCPU = c.getCpu_Player1().getScore() + 1;
+        }
+        
+        alert.setHeaderText("Player 1's Score: " + scoreMan  + '\n' + "Player 2's Score: " + scoreCPU);
+       
+        if(scoreMan  > scoreCPU){
+       	 alert.setContentText("Player 1 is the winner");
+        }
+        else if(scoreMan < scoreCPU){
+       	 alert.setContentText("Player 2 is the winner");
+        }
+        else{
+       	 alert.setContentText("Draw!");
+        }
+        
+        ButtonType playAgain = new ButtonType("Play Again");
+        ButtonType exitGame = new ButtonType("Exit Game");
+
+        alert.getButtonTypes().setAll(playAgain, exitGame);
+
+        Optional<ButtonType> buttonresult = alert.showAndWait();
+
+        if (buttonresult.get() == playAgain) {
+       	 
+       	 c.getMainMenu().show();
+       	 
+        } 
+        
+        else if (buttonresult.get() == exitGame) {
+            this.close();
+        }
+   }
 
     public ArrayList<Button> getAllButtons() {
         return listOfButtons;

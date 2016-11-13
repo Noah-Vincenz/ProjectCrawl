@@ -118,6 +118,16 @@ public class Controller {
                 Random random = new Random();
                 int randomNumber = 6;
                 while (true) {
+                	
+                	int count = 0; 
+                    for(int i = 6 ; i<12;++i){
+                        if(board.getHouses().get(i).getSeeds()==0)count++;
+                        
+                    }
+                    if(count == 6 ){ 
+                        break;
+                    }
+                    
                     randomNumber = random.nextInt(6) + 6;
                     if (board.getHouses().get(randomNumber).getSeeds() != 0) {
                         System.out.println("Index value is --> " + randomNumber + " <===> Value of the seed is ==> " + board.getHouses().get(randomNumber).getSeeds());
@@ -186,6 +196,11 @@ public class Controller {
             values.add(i.getSeeds());
         }
 
+       // player1 = cpu_Player1.getScore();
+       // player2 = manual_Player2.getScore();
+        
+        view.changeP1(manual_Player2.getScore());
+        view.changeP2(cpu_Player1.getScore());
         int winning = board.checkWin();
 
         if (winning == 1) {
@@ -224,21 +239,13 @@ public class Controller {
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        if (result.get() == playAgain) {
-            values.clear();
-            board.getPlayer1().setInitialScore(0);
-            board.getPlayer2().setInitialScore(0);
-            view.changeP1(0);
-            view.changeP2(0);
-            for (House h : board.getHouses()) {
-                h.resetSeeds();
-                values.add(h.getSeeds());
-            }
-            view.updateGrid(values);
-
-        } else if (result.get() == exitGame) {
-            view.close();
-        }
+        if (result.get() == playAgain){
+    		view.close();
+    		getMainMenu().show();
+     	}
+     	else if (result.get() == exitGame) {
+      	   view.close();
+      	}
     }
 
     public void setCPU(boolean Ai) {
